@@ -1,0 +1,37 @@
+.sec1 {
+    background: url("https://i.imgur.com/UAoizlr.jpg") no-repeat center center;
+    background-size: cover;
+    height: 800px;
+    overflow: hidden;
+}
+.sec1-text{
+    font-size: 75px;
+    color: black;
+    text-transform: uppercase;
+    transform: translate(50px,50px);
+}
+.shopbutton{
+    font-size: 36px;
+    transform: translate(50px,120px);
+}
+.shopbutton a {
+    text-decoration: none;
+    background-color: rgb(207, 203, 203);
+    color: rgb(56, 56, 56);
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 25px;
+}
+@media screen and (max-width:768px){
+    .sec1{
+        display: flex;
+        justify-content: center;/*need to fix the image for the media
+                                    as well the contrast thingy*/
+    }
+    .sec1-text{
+        transform: none;
+    }
+    .shopbutton{
+        transform: translate(65px,120px);
+    }
+}
