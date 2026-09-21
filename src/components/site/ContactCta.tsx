@@ -9,6 +9,7 @@ export function ContactCta({
   title?: string;
   body?: string;
 }) {
+  if (!siteConfig.phoneHref && !siteConfig.whatsappNumber) return null;
   return (
     <section className="bg-forest text-cream">
       <div className="mx-auto grid max-w-[1400px] gap-8 px-5 py-20 md:grid-cols-[1.1fr_1fr] md:items-end md:px-10 md:py-28">
@@ -18,7 +19,9 @@ export function ContactCta({
         <Reveal delay={90}>
           <p className="max-w-[60ch] text-cream/80">{body}</p>
           <ContactActions tone="onForest" className="mt-8" />
-          <p className="mt-6 text-sm text-cream/60">Serving {siteConfig.serviceArea}</p>
+          <p className="mt-6 text-sm text-cream/60">
+            Serving {siteConfig.serviceArea}
+          </p>
         </Reveal>
       </div>
     </section>

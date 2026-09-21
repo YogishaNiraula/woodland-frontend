@@ -32,79 +32,123 @@ const checklist = [
 ];
 
 function ContactPage() {
+  const hasContactMethod = Boolean(
+    siteConfig.phoneHref || siteConfig.whatsappNumber,
+  );
+
   return (
     <main id="main">
       <section className="mx-auto grid max-w-[1400px] gap-10 px-5 pb-16 pt-14 md:grid-cols-[1.1fr_1fr] md:gap-20 md:px-10 md:pt-20">
         <div>
-          <h1 className="max-w-[18ch] text-balance-tight">Talk to us about your piece.</h1>
+          <h1 className="max-w-[18ch] text-balance-tight">
+            Talk to us about your piece.
+          </h1>
           <p className="mt-6 max-w-[62ch] text-muted-foreground">
-            The quickest way to start is a call or a WhatsApp message with photos. We'll tell you what's possible and
-            what we need to measure. We don't give final prices online — estimates follow measurement and an agreed
-            specification.
+            Contact details are being confirmed. In the meantime, the checklist
+            here will help you prepare the information needed for an accurate
+            first conversation.
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <CallButton />
-            <WhatsAppButton />
-          </div>
-          <dl className="mt-12 grid gap-6 sm:grid-cols-2">
-            <div className="border-t border-line pt-4">
-              <dt className="text-xs uppercase tracking-[0.14em] text-timber">Phone</dt>
-              <dd className="mt-1">
-                <a href={siteConfig.phoneHref} className="hover:text-forest" data-analytics="click_call">
-                  {siteConfig.phoneDisplay}
-                </a>
-              </dd>
+          {hasContactMethod ? (
+            <div className="mt-8 flex flex-wrap gap-3">
+              <CallButton />
+              <WhatsAppButton />
             </div>
-            <div className="border-t border-line pt-4">
-              <dt className="text-xs uppercase tracking-[0.14em] text-timber">Service area</dt>
-              <dd className="mt-1">{siteConfig.serviceArea}</dd>
-            </div>
-            <div className="border-t border-line pt-4">
-              <dt className="text-xs uppercase tracking-[0.14em] text-timber">Workshop</dt>
-              <dd className="mt-1">
-                {siteConfig.address.line1}
-                <br />
-                {siteConfig.address.line2}
-                <br />
-                <span className="text-muted-foreground">{siteConfig.visitNote}</span>
-              </dd>
-            </div>
-            <div className="border-t border-line pt-4">
-              <dt className="text-xs uppercase tracking-[0.14em] text-timber">Response hours</dt>
-              <dd className="mt-1">{siteConfig.responseHours}</dd>
-            </div>
-          </dl>
+          ) : null}
+          {hasContactMethod ||
+          siteConfig.address ||
+          siteConfig.responseHours ? (
+            <dl className="mt-12 grid gap-6 sm:grid-cols-2">
+              {siteConfig.phoneHref && siteConfig.phoneDisplay ? (
+                <div className="border-t border-line pt-4">
+                  <dt className="text-xs uppercase tracking-[0.14em] text-timber">
+                    Phone
+                  </dt>
+                  <dd className="mt-1">
+                    <a
+                      href={siteConfig.phoneHref}
+                      className="hover:text-forest"
+                      data-analytics="click_call"
+                    >
+                      {siteConfig.phoneDisplay}
+                    </a>
+                  </dd>
+                </div>
+              ) : null}
+              <div className="border-t border-line pt-4">
+                <dt className="text-xs uppercase tracking-[0.14em] text-timber">
+                  Service area
+                </dt>
+                <dd className="mt-1">{siteConfig.serviceArea}</dd>
+              </div>
+              {siteConfig.address ? (
+                <div className="border-t border-line pt-4">
+                  <dt className="text-xs uppercase tracking-[0.14em] text-timber">
+                    Workshop
+                  </dt>
+                  <dd className="mt-1">
+                    {siteConfig.address.line1}
+                    <br />
+                    {siteConfig.address.line2}
+                    <br />
+                    <span className="text-muted-foreground">
+                      {siteConfig.visitNote}
+                    </span>
+                  </dd>
+                </div>
+              ) : null}
+              {siteConfig.responseHours ? (
+                <div className="border-t border-line pt-4">
+                  <dt className="text-xs uppercase tracking-[0.14em] text-timber">
+                    Response hours
+                  </dt>
+                  <dd className="mt-1">{siteConfig.responseHours}</dd>
+                </div>
+              ) : null}
+            </dl>
+          ) : null}
         </div>
 
         <Reveal>
           <div className="border border-line bg-card p-6 md:p-8">
-            <h2 className="font-display text-2xl">What to send in your first message</h2>
+            <h2 className="font-display text-2xl">
+              What to send in your first message
+            </h2>
             <ul className="mt-6 space-y-3 text-sm">
               {checklist.map((item) => (
-                <li key={item} className="border-b border-line pb-3 text-muted-foreground">
+                <li
+                  key={item}
+                  className="border-b border-line pb-3 text-muted-foreground"
+                >
                   {item}
                 </li>
               ))}
             </ul>
-            <p className="mt-6 text-sm text-muted-foreground">
-              Prefilled WhatsApp message: “{siteConfig.whatsappMessage}”
-            </p>
-            <WhatsAppButton className="mt-6 w-full" />
+            {siteConfig.whatsappNumber ? (
+              <p className="mt-6 text-sm text-muted-foreground">
+                Prefilled WhatsApp message: “{siteConfig.whatsappMessage}”
+              </p>
+            ) : null}
+            {siteConfig.whatsappNumber ? (
+              <WhatsAppButton className="mt-6 w-full" />
+            ) : null}
           </div>
         </Reveal>
       </section>
 
-      <section className="mx-auto max-w-[1400px] px-5 pb-20 md:px-10 md:pb-28">
-        <SectionHeading title="Find the workshop" intro="Visits are by appointment so someone is there to meet you." />
-        <div
-          className="mt-8 flex items-center justify-center border border-dashed border-line bg-cream-deep text-center"
-          style={{ aspectRatio: "16 / 7" }}
-        >
-          <p className="px-6 text-sm text-muted-foreground">
-            [MAP PLACEHOLDER — embed {siteConfig.mapUrl} once the workshop address is confirmed]
-          </p>
-        </div>
-      </section>
+      {siteConfig.mapUrl ? (
+        <section className="mx-auto max-w-[1400px] px-5 pb-20 md:px-10 md:pb-28">
+          <SectionHeading
+            title="Find the workshop"
+            intro="Visits are by appointment so someone is there to meet you."
+          />
+          <a
+            className="mt-8 inline-block border-b border-forest pb-1 text-forest"
+            href={siteConfig.mapUrl}
+          >
+            Open workshop map
+          </a>
+        </section>
+      ) : null}
     </main>
   );
 }

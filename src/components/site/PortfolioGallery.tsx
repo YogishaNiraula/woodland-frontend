@@ -5,12 +5,28 @@ import { Reveal } from "./Reveal";
 
 const ratios = ["4 / 5", "4 / 3", "1 / 1", "3 / 4", "4 / 3", "5 / 4"];
 
-export function ProjectCard({ project, ratio, index = 0 }: { project: Project; ratio?: string; index?: number }) {
+export function ProjectCard({
+  project,
+  ratio,
+  index = 0,
+}: {
+  project: Project;
+  ratio?: string;
+  index?: number;
+}) {
   return (
-    <Reveal delay={(index % 3) * 90} className={index % 2 === 1 ? "md:mt-16" : ""}>
-      <Link to="/portfolio/$slug" params={{ slug: project.slug }} className="group block">
+    <Reveal
+      delay={(index % 3) * 90}
+      className={index % 2 === 1 ? "md:mt-16" : ""}
+    >
+      <Link
+        to="/portfolio/$slug"
+        params={{ slug: project.slug }}
+        className="group block"
+      >
         <ResponsiveImage
           src={project.cover.src}
+          srcSmall={project.cover.srcSmall}
           alt={project.cover.alt}
           width={project.cover.width}
           height={project.cover.height}
@@ -32,10 +48,12 @@ export function PortfolioGallery({ items }: { items: Project[] }) {
   if (items.length === 0) {
     return (
       <div className="border border-dashed border-line px-6 py-16 text-center">
-        <h3 className="font-display text-xl">No projects in this category yet</h3>
+        <h3 className="font-display text-xl">
+          No projects in this category yet
+        </h3>
         <p className="mx-auto mt-3 max-w-[52ch] text-muted-foreground">
-          Choose another category, or send us a message describing the piece you have in mind — most of our work is
-          one-off and made to measure.
+          Choose another category, or send us a message describing the piece you
+          have in mind — most of our work is one-off and made to measure.
         </p>
       </div>
     );

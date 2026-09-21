@@ -1,5 +1,6 @@
 type Props = {
   src: string;
+  srcSmall?: string;
   alt: string;
   width: number;
   height: number;
@@ -11,6 +12,7 @@ type Props = {
 
 export function ResponsiveImage({
   src,
+  srcSmall,
   alt,
   width,
   height,
@@ -20,14 +22,19 @@ export function ResponsiveImage({
   priority = false,
 }: Props) {
   return (
-    <div className={`overflow-hidden bg-cream-deep ${className}`} style={ratio ? { aspectRatio: ratio } : undefined}>
+    <div
+      className={`overflow-hidden bg-cream-deep ${className}`}
+      style={ratio ? { aspectRatio: ratio } : undefined}
+    >
       <img
         src={src}
+        srcSet={srcSmall ? `${srcSmall} 720w, ${src} ${width}w` : undefined}
+        sizes="(min-width: 768px) 50vw, 100vw"
         alt={alt}
         width={width}
         height={height}
         loading={priority ? "eager" : "lazy"}
-        decoding={priority ? "sync" : "async"}
+        decoding="async"
         fetchPriority={priority ? "high" : "auto"}
         className={`h-full w-full object-cover ${imgClassName}`}
       />

@@ -14,7 +14,12 @@ export const Route = createFileRoute("/portfolio/$slug")({
   },
   head: ({ params, loaderData }) => {
     if (!loaderData) {
-      return { meta: [{ title: "Project unavailable — Woodland" }, { name: "robots", content: "noindex" }] };
+      return {
+        meta: [
+          { title: "Project unavailable — Woodland" },
+          { name: "robots", content: "noindex" },
+        ],
+      };
     }
     const t = `${loaderData.project.title} — Woodland`;
     return {
@@ -24,9 +29,17 @@ export const Route = createFileRoute("/portfolio/$slug")({
         { property: "og:title", content: t },
         { property: "og:description", content: loaderData.project.description },
         { property: "og:type", content: "article" },
-        { property: "og:url", content: `${siteConfig.domain}/portfolio/${params.slug}` },
+        {
+          property: "og:url",
+          content: `${siteConfig.domain}/portfolio/${params.slug}`,
+        },
       ],
-      links: [{ rel: "canonical", href: `${siteConfig.domain}/portfolio/${params.slug}` }],
+      links: [
+        {
+          rel: "canonical",
+          href: `${siteConfig.domain}/portfolio/${params.slug}`,
+        },
+      ],
     };
   },
   component: ProjectPage,
@@ -38,7 +51,10 @@ function ProjectMissing() {
   return (
     <main id="main" className="mx-auto max-w-[1400px] px-5 py-24 md:px-10">
       <h1 className="max-w-[18ch]">We couldn't find that project.</h1>
-      <Link to="/portfolio" className="mt-6 inline-block border-b border-forest pb-1 text-sm text-forest">
+      <Link
+        to="/portfolio"
+        className="mt-6 inline-block border-b border-forest pb-1 text-sm text-forest"
+      >
         Back to portfolio
       </Link>
     </main>
@@ -52,7 +68,10 @@ function ProjectPage() {
   return (
     <main id="main">
       <div className="mx-auto max-w-[1400px] px-5 pt-8 md:px-10">
-        <Link to="/portfolio" className="text-sm text-muted-foreground hover:text-forest">
+        <Link
+          to="/portfolio"
+          className="text-sm text-muted-foreground hover:text-forest"
+        >
           ← Portfolio
         </Link>
       </div>
@@ -60,6 +79,7 @@ function ProjectPage() {
       <section className="mx-auto mt-6 max-w-[1400px] px-5 md:px-10">
         <ResponsiveImage
           src={project.cover.src}
+          srcSmall={project.cover.srcSmall}
           alt={project.cover.alt}
           width={project.cover.width}
           height={project.cover.height}
@@ -70,9 +90,13 @@ function ProjectPage() {
 
       <section className="mx-auto grid max-w-[1400px] gap-10 px-5 py-14 md:grid-cols-[1.2fr_1fr] md:gap-20 md:px-10 md:py-20">
         <div>
-          <p className="text-xs uppercase tracking-[0.16em] text-timber">{project.category}</p>
+          <p className="text-xs uppercase tracking-[0.16em] text-timber">
+            {project.category}
+          </p>
           <h1 className="mt-3 text-balance-tight">{project.title}</h1>
-          <p className="mt-6 max-w-[62ch] text-muted-foreground">{project.description}</p>
+          <p className="mt-6 max-w-[62ch] text-muted-foreground">
+            {project.description}
+          </p>
         </div>
         <div>
           {project.materials?.length ? (
@@ -99,9 +123,14 @@ function ProjectPage() {
         <section className="mx-auto max-w-[1400px] px-5 pb-20 md:px-10 md:pb-28">
           <div className="grid gap-6 md:grid-cols-2">
             {project.gallery.map((image, i) => (
-              <Reveal key={image.src + i} delay={i * 80} className={i % 2 === 1 ? "md:mt-12" : ""}>
+              <Reveal
+                key={image.src + i}
+                delay={i * 80}
+                className={i % 2 === 1 ? "md:mt-12" : ""}
+              >
                 <ResponsiveImage
                   src={image.src}
+                  srcSmall={image.srcSmall}
                   alt={image.alt}
                   width={image.width}
                   height={image.height}
@@ -119,7 +148,12 @@ function ProjectPage() {
             <h2>Related work</h2>
             <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {related.map((item, i) => (
-                <ProjectCard key={item.slug} project={item} index={i} ratio="4 / 3" />
+                <ProjectCard
+                  key={item.slug}
+                  project={item}
+                  index={i}
+                  ratio="4 / 3"
+                />
               ))}
             </div>
           </div>

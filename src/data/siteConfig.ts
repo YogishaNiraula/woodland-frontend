@@ -1,7 +1,3 @@
-/**
- * Single source of truth for editable business information.
- * Replace every [PLACEHOLDER] value before launch.
- */
 export const siteConfig = {
   name: "Woodland",
   tagline: "Custom Furniture & Woodwork",
@@ -9,36 +5,22 @@ export const siteConfig = {
   domain: "https://woodland.com.np",
   serviceArea: "Kathmandu Valley, Nepal",
 
-  // [PLACEHOLDER] Replace with the real phone number in international format.
-  phoneDisplay: "+977 [PHONE NUMBER]",
-  phoneHref: "tel:+9770000000000",
-
-  // [PLACEHOLDER] Replace with the real WhatsApp number (digits only, with country code).
-  whatsappNumber: "9770000000000",
+  phoneDisplay: null as string | null,
+  phoneHref: null as string | null,
+  whatsappNumber: null as string | null,
   whatsappMessage:
     "Hello Woodland, I'm interested in custom furniture. I would like to discuss [item]. My location is [location], and the approximate size is [size].",
 
-  // [PLACEHOLDER] Replace with the real workshop address.
-  address: {
-    line1: "[WORKSHOP ADDRESS LINE 1]",
-    line2: "[AREA], Kathmandu Valley, Nepal",
-  },
-  // [PLACEHOLDER] Replace with a real Google Maps embed / share URL.
-  mapUrl: "[GOOGLE MAPS URL]",
-
-  // [PLACEHOLDER] Replace with confirmed response hours.
-  responseHours: "[RESPONSE HOURS — e.g. Sun–Fri, 9:00–18:00]",
+  address: null as { line1: string; line2: string } | null,
+  mapUrl: null as string | null,
+  responseHours: null as string | null,
   visitNote: "Workshop visits by appointment.",
-
-  // [PLACEHOLDER] Replace or remove social links.
-  social: {
-    facebook: "[FACEBOOK URL]",
-    instagram: "[INSTAGRAM URL]",
-  },
 } as const;
 
 export function whatsappLink(message: string = siteConfig.whatsappMessage) {
-  return `https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(message)}`;
+  return siteConfig.whatsappNumber
+    ? `https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(message)}`
+    : null;
 }
 
 export const localBusinessJsonLd = {

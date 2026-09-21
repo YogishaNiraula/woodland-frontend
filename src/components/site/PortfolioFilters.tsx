@@ -11,7 +11,11 @@ export function PortfolioFilters({
 }) {
   const options: Filter[] = ["All", ...categories];
   return (
-    <div role="group" aria-label="Filter projects by category" className="flex flex-wrap gap-2">
+    <div
+      role="group"
+      aria-label="Filter projects by category"
+      className="flex flex-wrap gap-2"
+    >
       {options.map((option) => {
         const active = option === value;
         return (
@@ -20,7 +24,7 @@ export function PortfolioFilters({
             type="button"
             aria-pressed={active}
             onClick={() => onChange(option)}
-            className={`rounded-xs border px-4 py-2 text-sm transition-colors ${
+            className={`min-h-11 rounded-xs border px-4 py-2 text-sm transition-colors ${
               active
                 ? "border-forest bg-forest text-cream"
                 : "border-line text-charcoal/80 hover:border-forest hover:text-forest"

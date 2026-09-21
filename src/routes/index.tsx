@@ -1,14 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ContactActions } from "@/components/site/ContactButtons";
 import { ContactCta } from "@/components/site/ContactCta";
-import { PortfolioGallery } from "@/components/site/PortfolioGallery";
 import { ProcessSteps } from "@/components/site/ProcessSteps";
 import { Reveal } from "@/components/site/Reveal";
 import { ResponsiveImage } from "@/components/site/ResponsiveImage";
 import { SectionHeading } from "@/components/site/SectionHeading";
-import { Testimonials } from "@/components/site/Testimonials";
 import { images } from "@/data/images";
-import { featuredProjects } from "@/data/projects";
 import { services } from "@/data/services";
 import { siteConfig } from "@/data/siteConfig";
 
@@ -61,16 +58,21 @@ function Index() {
       <section className="border-b border-line">
         <div className="mx-auto grid max-w-[1400px] gap-10 px-5 pb-14 pt-12 md:grid-cols-[1fr_1.15fr] md:items-end md:gap-14 md:px-10 md:pb-20 md:pt-16">
           <div>
-            <h1 className="text-balance-tight">Made for your home. Built to last.</h1>
+            <h1 className="text-balance-tight">
+              Made for your home. Built to last.
+            </h1>
             <p className="mt-6 max-w-[58ch] text-muted-foreground">
-              Custom furniture and woodwork, thoughtfully measured, crafted, delivered, and installed across
-              Kathmandu Valley.
+              Custom furniture and woodwork, thoughtfully measured, crafted,
+              delivered, and installed across Kathmandu Valley.
             </p>
             <ContactActions className="mt-8" />
-            <p className="mt-6 text-sm tracking-wide text-timber">Serving {siteConfig.serviceArea}</p>
+            <p className="mt-6 text-sm tracking-wide text-timber">
+              Serving {siteConfig.serviceArea}
+            </p>
           </div>
           <ResponsiveImage
             src={images.heroBedroom.src}
+            srcSmall={images.heroBedroom.srcSmall}
             alt="Made-to-measure timber wardrobe wall and panelled bed surround in a calm bedroom"
             width={images.heroBedroom.width}
             height={images.heroBedroom.height}
@@ -95,31 +97,18 @@ function Index() {
               className="grid gap-2 border-b border-line py-6 md:grid-cols-[minmax(0,18rem)_1fr] md:gap-10"
             >
               <h3 className="font-display text-2xl">{service.title}</h3>
-              <p className="max-w-[62ch] text-muted-foreground">{service.summary}</p>
+              <p className="max-w-[62ch] text-muted-foreground">
+                {service.summary}
+              </p>
             </Reveal>
           ))}
         </ul>
-        <Link to="/services" className="mt-8 inline-block border-b border-forest pb-1 text-sm text-forest">
+        <Link
+          to="/services"
+          className="mt-8 inline-block border-b border-forest pb-1 text-sm text-forest"
+        >
           See what each service includes
         </Link>
-      </section>
-
-      {/* Featured work */}
-      <section className="bg-cream-deep py-20 md:py-28">
-        <div className="mx-auto max-w-[1400px] px-5 md:px-10">
-          <div className="flex flex-wrap items-end justify-between gap-6">
-            <SectionHeading
-              title="Selected work"
-              intro="Sample pieces showing the kind of work we take on. Photography here is placeholder material while our own project images are prepared."
-            />
-            <Link to="/portfolio" className="border-b border-forest pb-1 text-sm text-forest">
-              View full portfolio
-            </Link>
-          </div>
-          <div className="mt-12">
-            <PortfolioGallery items={featuredProjects} />
-          </div>
-        </div>
       </section>
 
       {/* Why Woodland */}
@@ -132,9 +121,15 @@ function Index() {
             />
             <div className="mt-10 space-y-8">
               {reasons.map((reason, i) => (
-                <Reveal key={reason.title} delay={i * 60} className="border-t border-line pt-5">
+                <Reveal
+                  key={reason.title}
+                  delay={i * 60}
+                  className="border-t border-line pt-5"
+                >
                   <h3>{reason.title}</h3>
-                  <p className="mt-2 max-w-[62ch] text-muted-foreground">{reason.body}</p>
+                  <p className="mt-2 max-w-[62ch] text-muted-foreground">
+                    {reason.body}
+                  </p>
                 </Reveal>
               ))}
             </div>
@@ -142,6 +137,7 @@ function Index() {
           <Reveal className="md:sticky md:top-28 md:self-start">
             <ResponsiveImage
               src={images.workshop.src}
+              srcSmall={images.workshop.srcSmall}
               alt="Workshop bench with hand planes, chisels and freshly planed timber boards"
               width={images.workshop.width}
               height={images.workshop.height}
@@ -154,9 +150,12 @@ function Index() {
       {/* Process */}
       <section className="bg-forest-deep py-20 text-cream md:py-28">
         <div className="mx-auto max-w-[1400px] px-5 md:px-10">
-          <h2 className="max-w-[20ch] text-balance-tight">From first conversation to installed piece</h2>
+          <h2 className="max-w-[20ch] text-balance-tight">
+            From first conversation to installed piece
+          </h2>
           <p className="mt-4 max-w-[62ch] text-cream/75">
-            Six steps, in the same order every time. Estimates come after measurement, not before.
+            Six steps, in the same order every time. Estimates come after
+            measurement, not before.
           </p>
           <ProcessSteps tone="forest" />
         </div>
@@ -168,6 +167,7 @@ function Index() {
           <Reveal>
             <ResponsiveImage
               src={images.materials.src}
+              srcSmall={images.materials.srcSmall}
               alt="Samples of solid timber and veneered engineered board on a cream surface"
               width={images.materials.width}
               height={images.materials.height}
@@ -180,21 +180,11 @@ function Index() {
               intro="Neither material is better in every situation. Solid wood suits exposed frames, table tops, doors, stairs and edges that get handled. Engineered boards stay flatter over long spans and wide panels, which makes them well suited to wardrobe carcasses, shelving runs and kitchen units."
             />
             <p className="mt-4 max-w-[62ch] text-muted-foreground">
-              We recommend materials based on function, appearance, durability and budget for your specific piece, and
-              we tell you where a cheaper option is sensible and where it is not.
+              We recommend materials based on function, appearance, durability
+              and budget for your specific piece, and we tell you where a
+              cheaper option is sensible and where it is not.
             </p>
           </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="bg-cream-deep py-20 md:py-28">
-        <div className="mx-auto max-w-[1400px] px-5 md:px-10">
-          <SectionHeading
-            title="What customers say"
-            intro="Reserved for genuine, approved customer feedback. Nothing below is published yet."
-          />
-          <Testimonials />
         </div>
       </section>
 
